@@ -1,0 +1,73 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+    @if (!isSuccessful) {
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          placeholder="Ingresa tu username"
+          [(ngModel)]="form.username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Ingresa tu correo"
+          [(ngModel)]="form.email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Ingresa tu contraseña"
+          [(ngModel)]="form.password"
+        />
+      </div>
+
+      <!-- NUEVO: Roles como checkboxes -->
+      <div class="form-group">
+        <label>Roles</label>
+        <div *ngFor="let role of availableRoles">
+          <input
+            type="checkbox"
+            [value]="role"
+            (change)="onRoleChange($event)"
+          /> {{ role }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Sign Up</button>
+      </div>
+
+      @if (f.submitted && isSignUpFailed) {
+      <div class="alert alert-warning">
+        Registro Fallo<br />{{ errorMessage }}
+      </div>
+      }
+    </form>
+    } @else {
+    <div class="alert alert-success">Registro exitoso</div>
+    }
+  </div>
+</div>

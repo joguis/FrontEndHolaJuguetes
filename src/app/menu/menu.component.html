@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" routerLink="home">Ejemplo</a>
+
+  <ul class="navbar-nav me-auto" routerLinkActive="active">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/home">Home</a>
+    </li>
+    <li class="nav-item" *ngIf="showAdminBoard">
+      <a class="nav-link" routerLink="/admin">Contenido del rol admin</a>
+    </li>
+    <li class="nav-item" *ngIf="showModeratorBoard">
+      <a class="nav-link" routerLink="/mod">Contenido del rol moderador</a>
+    </li>
+    <li class="nav-item" *ngIf="isLoggedIn">
+      <a class="nav-link" routerLink="/user">Contenido del rol usuario</a>
+    </li>
+  </ul>
+
+  <!-- Elementos a la derecha -->
+  <ul class="navbar-nav ms-auto">
+    <ng-container *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register">Registrarse</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile">{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()" style="cursor:pointer">LogOut</a>
+      </li>
+    </ng-container>
+  </ul>
+</nav>
+
+
