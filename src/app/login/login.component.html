@@ -1,52 +1,118 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    @if (!isLoggedIn) {
-    <form
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          placeholder="Ingresa tu contraseña"
-          [(ngModel)]="form.username"
-          required
-        />
+<div class="auth-wrapper animate-fade-in">
+  <div class="toy-card auth-card">
+    <!-- Header with Icon and Brand Title -->
+    <div class="auth-header text-center">
+      <div class="auth-avatar-box mx-auto mb-3">
+        <i class="bi bi-person-fill-lock"></i>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="Ingresa tu contraseña"
-          [(ngModel)]="form.password"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Login</button>
-      </div>
-      <div class="form-group">
+      <h3 class="auth-title mb-1">Iniciar Sesión</h3>
+      <p class="auth-subtitle text-muted mb-0">Accede a tu cuenta de Hola Juguetes</p>
+    </div>
+
+    <div class="auth-body">
+      @if (!isLoggedIn) {
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <!-- Username Field -->
+        <div class="toy-form-group">
+          <label for="username" class="toy-label">Nombre de Usuario</label>
+          <div class="toy-input-wrapper">
+            <span class="toy-input-icon">
+              <i class="bi bi-person"></i>
+            </span>
+            <input
+              id="username"
+              type="text"
+              class="toy-input"
+              name="username"
+              placeholder="Ingresa tu nombre de usuario"
+              [(ngModel)]="form.username"
+              required
+              #username="ngModel"
+            />
+          </div>
+          @if (f.submitted && username.errors) {
+            <small class="text-danger mt-1 d-block">
+              <i class="bi bi-exclamation-circle me-1"></i> El usuario es obligatorio
+            </small>
+          }
+        </div>
+
+        <!-- Password Field -->
+        <div class="toy-form-group">
+          <label for="password" class="toy-label">Contraseña</label>
+          <div class="toy-input-wrapper">
+            <span class="toy-input-icon">
+              <i class="bi bi-lock"></i>
+            </span>
+            <input
+              id="password"
+              type="password"
+              class="toy-input"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              [(ngModel)]="form.password"
+              required
+              #password="ngModel"
+            />
+          </div>
+          @if (f.submitted && password.errors) {
+            <small class="text-danger mt-1 d-block">
+              <i class="bi bi-exclamation-circle me-1"></i> La contraseña es obligatoria
+            </small>
+          }
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-4 mb-3">
+          <button type="submit" class="toy-btn-primary w-100 py-2">
+            <i class="bi bi-box-arrow-in-right"></i> Entrar
+          </button>
+        </div>
+
+        <!-- Error Alert -->
         @if (f.submitted && isLoginFailed) {
-        <div class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
+        <div class="toy-alert toy-alert-danger mt-3" role="alert">
+          <i class="bi bi-x-circle-fill text-danger fs-5 flex-shrink-0"></i>
+          <div>
+            <strong>Error de acceso:</strong>
+            <div class="mt-1">{{ errorMessage || 'Credenciales inválidas. Por favor verifica tus datos.' }}</div>
+          </div>
         </div>
         }
+      </form>
+
+      <!-- Footer navigation to register -->
+      <div class="auth-footer text-center pt-3 border-top mt-3">
+        <p class="mb-0 text-muted small">
+          ¿Aún no tienes una cuenta?
+          <a routerLink="/register" class="fw-bold text-primary text-decoration-none ms-1">
+            Crear cuenta aquí
+          </a>
+        </p>
       </div>
-    </form>
-    } @else {
-    <div class="alert alert-success">Logged in as {{ roles }}.</div>
-    }
+      } @else {
+      <!-- Already logged in state -->
+      <div class="text-center py-4">
+        <div class="badge-success-circle mx-auto mb-3">
+          <i class="bi bi-check2"></i>
+        </div>
+        <h4 class="mb-2">¡Sesión Activa!</h4>
+        <p class="text-muted mb-3">Has iniciado sesión correctamente con el rol:</p>
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+          @for (role of roles; track role) {
+            <span class="toy-badge toy-badge-user">{{ role }}</span>
+          }
+        </div>
+        <a routerLink="/home" class="toy-btn-primary">
+          <i class="bi bi-house-door"></i> Ir al Inicio
+        </a>
+      </div>
+      }
+    </div>
   </div>
 </div>

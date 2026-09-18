@@ -1,0 +1,126 @@
+.profile-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--toy-radius-xl);
+}
+
+.profile-banner {
+  height: 120px;
+  background: var(--toy-primary-gradient);
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: radial-gradient(#ffffff 2px, transparent 2px);
+  background-size: 16px 16px;
+}
+
+.profile-header-content {
+  padding: 0 2rem 1.5rem;
+  margin-top: -50px;
+  position: relative;
+}
+
+.profile-avatar-wrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 4px;
+  margin: 0 auto 1rem;
+  box-shadow: var(--toy-shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-initials {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--toy-primary-gradient);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  font-family: var(--toy-font-heading);
+  font-weight: 800;
+}
+
+.profile-username {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.section-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.info-tile {
+  background: #f8fafc;
+  border: 1px solid var(--toy-border);
+  border-radius: var(--toy-radius-md);
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.info-tile-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--toy-radius-md);
+  background: #ffffff;
+  border: 1px solid var(--toy-border);
+  color: var(--toy-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.info-tile-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-tile-label {
+  font-size: 0.78rem;
+  color: var(--toy-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.info-tile-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--toy-text-primary);
+}
+
+.empty-state-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}

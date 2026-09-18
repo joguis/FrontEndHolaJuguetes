@@ -1,73 +1,174 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    @if (!isSuccessful) {
-    <form
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          placeholder="Ingresa tu username"
-          [(ngModel)]="form.username"
-          required
-        />
+<div class="auth-wrapper animate-fade-in">
+  <div class="toy-card auth-card">
+    <!-- Header with Icon and Brand Title -->
+    <div class="auth-header text-center">
+      <div class="auth-avatar-box mx-auto mb-3">
+        <i class="bi bi-person-plus-fill"></i>
       </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          placeholder="Ingresa tu correo"
-          [(ngModel)]="form.email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="Ingresa tu contraseña"
-          [(ngModel)]="form.password"
-        />
-      </div>
+      <h3 class="auth-title mb-1">Crear Cuenta</h3>
+      <p class="auth-subtitle text-muted mb-0">Únete a la comunidad de Hola Juguetes</p>
+    </div>
 
-      <!-- NUEVO: Roles como checkboxes -->
-      <div class="form-group">
-        <label>Roles</label>
-        <div *ngFor="let role of availableRoles">
-          <input
-            type="checkbox"
-            [value]="role"
-            (change)="onRoleChange($event)"
-          /> {{ role }}
+    <div class="auth-body">
+      @if (!isSuccessful) {
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <!-- Username Field -->
+        <div class="toy-form-group">
+          <label for="username" class="toy-label">Nombre de Usuario</label>
+          <div class="toy-input-wrapper">
+            <span class="toy-input-icon">
+              <i class="bi bi-person"></i>
+            </span>
+            <input
+              id="username"
+              type="text"
+              class="toy-input"
+              name="username"
+              placeholder="Elige un nombre de usuario"
+              [(ngModel)]="form.username"
+              required
+              minlength="3"
+              #username="ngModel"
+            />
+          </div>
+          @if (f.submitted && username.errors) {
+            <small class="text-danger mt-1 d-block">
+              <i class="bi bi-exclamation-circle me-1"></i> El usuario es obligatorio (mínimo 3 caracteres)
+            </small>
+          }
         </div>
-      </div>
 
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
-      </div>
+        <!-- Email Field -->
+        <div class="toy-form-group">
+          <label for="email" class="toy-label">Correo Electrónico</label>
+          <div class="toy-input-wrapper">
+            <span class="toy-input-icon">
+              <i class="bi bi-envelope"></i>
+            </span>
+            <input
+              id="email"
+              type="email"
+              class="toy-input"
+              name="email"
+              placeholder="tu.correo@ejemplo.com"
+              [(ngModel)]="form.email"
+              email
+              #email="ngModel"
+            />
+          </div>
+          @if (f.submitted && email.errors) {
+            <small class="text-danger mt-1 d-block">
+              <i class="bi bi-exclamation-circle me-1"></i> Formato de correo inválido
+            </small>
+          }
+        </div>
 
-      @if (f.submitted && isSignUpFailed) {
-      <div class="alert alert-warning">
-        Registro Fallo<br />{{ errorMessage }}
+        <!-- Password Field -->
+        <div class="toy-form-group">
+          <label for="password" class="toy-label">Contraseña</label>
+          <div class="toy-input-wrapper">
+            <span class="toy-input-icon">
+              <i class="bi bi-lock"></i>
+            </span>
+            <input
+              id="password"
+              type="password"
+              class="toy-input"
+              name="password"
+              placeholder="Mínimo 6 caracteres"
+              [(ngModel)]="form.password"
+              minlength="6"
+              #password="ngModel"
+            />
+          </div>
+          @if (f.submitted && password.errors) {
+            <small class="text-danger mt-1 d-block">
+              <i class="bi bi-exclamation-circle me-1"></i> La contraseña debe tener al menos 6 caracteres
+            </small>
+          }
+        </div>
+
+        <!-- Roles Selection Section -->
+        <div class="toy-form-group">
+          <label class="toy-label">
+            <span>Roles de Acceso</span>
+            <small class="text-muted fw-normal ms-1">(Selecciona los perfiles que deseas solicitar)</small>
+          </label>
+          
+          <div class="roles-selection-grid">
+            <div *ngFor="let role of availableRoles" class="role-checkbox-card">
+              <label class="d-flex align-items-center gap-2 cursor-pointer w-100 m-0">
+                <input
+                  type="checkbox"
+                  class="form-check-input role-check"
+                  [value]="role"
+                  (change)="onRoleChange($event)"
+                />
+                <span class="role-badge-pill" [ngClass]="{
+                  'badge-user-style': role === 'user',
+                  'badge-mod-style': role === 'mod',
+                  'badge-admin-style': role === 'admin'
+                }">
+                  <i class="bi" [ngClass]="{
+                    'bi-person-check': role === 'user',
+                    'bi-shield-check': role === 'mod',
+                    'bi-gear-fill': role === 'admin'
+                  }"></i>
+                  {{ role === 'user' ? 'Usuario' : role === 'mod' ? 'Moderador' : 'Administrador' }}
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-4 mb-3">
+          <button type="submit" class="toy-btn-primary w-100 py-2">
+            <i class="bi bi-check2-circle"></i> Completar Registro
+          </button>
+        </div>
+
+        <!-- Error Alert -->
+        @if (f.submitted && isSignUpFailed) {
+        <div class="toy-alert toy-alert-warning mt-3" role="alert">
+          <i class="bi bi-exclamation-triangle-fill text-warning fs-5 flex-shrink-0"></i>
+          <div>
+            <strong>No se pudo completar el registro:</strong>
+            <div class="mt-1">{{ errorMessage || 'Por favor revisa la información ingresada.' }}</div>
+          </div>
+        </div>
+        }
+      </form>
+
+      <!-- Footer navigation to login -->
+      <div class="auth-footer text-center pt-3 border-top mt-3">
+        <p class="mb-0 text-muted small">
+          ¿Ya tienes una cuenta registrada?
+          <a routerLink="/login" class="fw-bold text-primary text-decoration-none ms-1">
+            Inicia sesión aquí
+          </a>
+        </p>
+      </div>
+      } @else {
+      <!-- Successful Registration Screen -->
+      <div class="text-center py-4">
+        <div class="success-icon-circle mx-auto mb-3">
+          <i class="bi bi-check-lg"></i>
+        </div>
+        <h4 class="fw-bold mb-2">¡Registro Exitoso!</h4>
+        <p class="text-muted mb-4">
+          Tu cuenta ha sido creada correctamente en <strong>Hola Juguetes</strong>. Ahora puedes acceder con tus credenciales.
+        </p>
+        <a routerLink="/login" class="toy-btn-primary">
+          <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión Ahora
+        </a>
       </div>
       }
-    </form>
-    } @else {
-    <div class="alert alert-success">Registro exitoso</div>
-    }
+    </div>
   </div>
 </div>

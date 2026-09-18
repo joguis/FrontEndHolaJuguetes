@@ -20,8 +20,17 @@ export class MenuComponent implements OnInit, OnDestroy {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  isMobileMenuOpen = false;
 
   eventBusSub?: Subscription;
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
+  }
 
   constructor(
     private storageService: StorageService,

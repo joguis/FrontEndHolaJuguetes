@@ -1,0 +1,51 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.app-main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-footer {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--toy-border);
+  margin-top: auto;
+}
+
+.footer-logo-icon {
+  font-size: 1.4rem;
+  color: var(--toy-pink);
+  display: flex;
+}
+
+.footer-brand-title {
+  font-family: var(--toy-font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--toy-primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-tagline {
+  font-size: 0.88rem;
+  color: var(--toy-text-secondary);
+  max-width: 480px;
+}
+
+.footer-copyright {
+  font-size: 0.82rem;
+  color: var(--toy-text-muted);
+}

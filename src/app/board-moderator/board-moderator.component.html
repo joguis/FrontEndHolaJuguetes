@@ -1,7 +1,102 @@
-<div class="container">
-  <header class="jumbotron">
-    <p class="bg-light border border-dark p-3 rounded">{{ content }}</p>
-  </header>
+<div class="dashboard-page animate-fade-in py-4">
+  <!-- Header Banner -->
+  <div class="dashboard-header mb-4">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+      <div class="d-flex align-items-center gap-3">
+        <div class="header-icon-box mod-header-icon">
+          <i class="bi bi-sliders"></i>
+        </div>
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <h2 class="header-title mb-0">Panel de Moderación</h2>
+            <span class="toy-badge toy-badge-mod">
+              <i class="bi bi-shield-shaded"></i> Rol Moderador
+            </span>
+          </div>
+          <p class="header-subtitle text-muted mb-0">
+            Control de calidad del catálogo, revisión de comentarios y soporte comunitario
+          </p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <a routerLink="/profile" class="toy-btn-secondary btn-sm">
+          <i class="bi bi-person-circle"></i> Ver Mi Perfil
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Content Card -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="toy-card api-content-card mod-border">
+        <div class="d-flex align-items-start gap-3">
+          <div class="api-card-icon mod-icon-bg">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <div class="flex-grow-1">
+            <span class="api-card-label mod-label-color">Respuesta del Endpoint Moderador</span>
+            <div class="api-content-text mt-1">
+              {{ content ? content : 'Obteniendo respuesta del servidor...' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Moderator Widgets Grid -->
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-3">
+      <div class="toy-card toy-card-interactive h-100 p-4">
+        <div class="widget-icon-circle icon-amber mb-3">
+          <i class="bi bi-chat-left-quote-fill"></i>
+        </div>
+        <h5 class="widget-title mb-1">Reseñas y Opiniones</h5>
+        <p class="widget-desc text-muted mb-3">Verifica comentarios y valoraciones para asegurar un entorno constructivo.</p>
+        <span class="badge bg-light text-secondary border rounded-pill px-3 py-1">
+          <i class="bi bi-check-circle me-1"></i> Cola al día
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="toy-card toy-card-interactive h-100 p-4">
+        <div class="widget-icon-circle icon-indigo mb-3">
+          <i class="bi bi-tags-fill"></i>
+        </div>
+        <h5 class="widget-title mb-1">Fichas de Productos</h5>
+        <p class="widget-desc text-muted mb-3">Validación de descripciones, edades recomendadas y etiquetas de juguetes.</p>
+        <span class="badge bg-light text-secondary border rounded-pill px-3 py-1">
+          <i class="bi bi-layers me-1"></i> Catálogo Activo
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="toy-card toy-card-interactive h-100 p-4">
+        <div class="widget-icon-circle icon-pink mb-3">
+          <i class="bi bi-flag-fill"></i>
+        </div>
+        <h5 class="widget-title mb-1">Reportes e Incidencias</h5>
+        <p class="widget-desc text-muted mb-3">Atención a quejas sobre publicaciones o discrepancias de productos.</p>
+        <span class="badge bg-light text-secondary border rounded-pill px-3 py-1">
+          <i class="bi bi-shield-exclamation me-1"></i> 0 Pendientes
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="toy-card toy-card-interactive h-100 p-4">
+        <div class="widget-icon-circle icon-emerald mb-3">
+          <i class="bi bi-journal-check"></i>
+        </div>
+        <h5 class="widget-title mb-1">Guías de Contenido</h5>
+        <p class="widget-desc text-muted mb-3">Consulta de directrices de seguridad infantil y normativas comerciales.</p>
+        <span class="badge bg-light text-secondary border rounded-pill px-3 py-1">
+          <i class="bi bi-book me-1"></i> Normativa 2026
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
-
-

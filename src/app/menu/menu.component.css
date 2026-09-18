@@ -1,0 +1,77 @@
+.toy-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--toy-border);
+  box-shadow: var(--toy-shadow-sm);
+  padding: 0.85rem 0;
+  backdrop-filter: blur(8px);
+}
+
+.brand-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--toy-radius-md);
+  background: var(--toy-primary-gradient);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.brand-title {
+  font-family: var(--toy-font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--toy-text-primary);
+}
+
+.nav-main-links {
+  margin-left: 1.5rem;
+  gap: 0.25rem;
+}
+
+.nav-link-custom {
+  color: var(--toy-text-secondary) !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.5rem 0.95rem !important;
+  border-radius: var(--toy-radius-md);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-custom:hover {
+  color: var(--toy-primary) !important;
+  background-color: var(--toy-primary-light);
+}
+
+.nav-link-custom.active {
+  color: var(--toy-primary) !important;
+  background-color: var(--toy-primary-light);
+  font-weight: 700;
+}
+
+.badge-nav.admin-nav {
+  color: #b91c1c !important;
+}
+.badge-nav.admin-nav:hover, .badge-nav.admin-nav.active {
+  background-color: #fee2e2;
+  color: #991b1b !important;
+}
+
+.badge-nav.mod-nav {
+  color: #b45309 !important;
+}
+.badge-nav.mod-nav:hover, .badge-nav.mod-nav.active {
+  background-color: #fef3c7;
+  color: #92400e !important;
+}
+
+.custom-toggler {
+  font-size: 1.5rem;
+  color: var(--toy-text-primary);
+  padding: 0.25rem 0.5rem;
+}

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { StorageService } from '../services/storage-service.service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

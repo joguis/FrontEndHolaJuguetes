@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-board-user',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './board-user.component.html',
   styleUrl: './board-user.component.css'
 })
-export class BoardUserComponent {
+export class BoardUserComponent implements OnInit {
   public content?: string;
 
   constructor(private userService: UserService) { }
