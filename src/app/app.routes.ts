@@ -7,23 +7,31 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/AuthGuardFuntion';
+import { roleGuard } from './guards/RoleGuardFuntion';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   {
     path: 'user',
-    component: BoardUserComponent
+    component: BoardUserComponent,
+    canActivate: [
+      authGuard,
+      roleGuard(['ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN']),
+    ],
   },
   {
     path: 'mod',
-    component: BoardModeratorComponent
+    component: BoardModeratorComponent,
+    canActivate: [authGuard, roleGuard(['ROLE_MODERATOR'])],
   },
   {
     path: 'admin',
-    component: BoardAdminComponent
+    component: BoardAdminComponent,
+    canActivate: [authGuard, roleGuard(['ROLE_ADMIN'])],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
