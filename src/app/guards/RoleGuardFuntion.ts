@@ -16,8 +16,12 @@ export function roleGuard(expectedRoles: string[]): CanActivateFn {
                 return true;
             }
         }
-        console.log("Usuario no tiene el rol requerido, redirigiendo a login");
-        router.navigate(['/login']);
+        const fallback = user?.roles?.includes('ROLE_ADMIN')
+            ? '/dashboard'
+            : user?.roles?.some((role: string) => ['ROLE_SELLER', 'ROLE_VENDEDOR'].includes(role))
+                ? '/movimientos/registrar'
+                : '/login';
+        router.navigate([fallback]);
         return false;
             
     };

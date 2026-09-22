@@ -110,16 +110,14 @@
                   (change)="onRoleChange($event)"
                 />
                 <span class="role-badge-pill" [ngClass]="{
-                  'badge-user-style': role === 'user',
-                  'badge-mod-style': role === 'mod',
+                    'badge-seller-style': role === 'seller',
                   'badge-admin-style': role === 'admin'
                 }">
                   <i class="bi" [ngClass]="{
-                    'bi-person-check': role === 'user',
-                    'bi-shield-check': role === 'mod',
+                    'bi-person-check': role === 'seller',
                     'bi-gear-fill': role === 'admin'
                   }"></i>
-                  {{ role === 'user' ? 'Usuario' : role === 'mod' ? 'Moderador' : 'Administrador' }}
+                  {{ role === 'seller' ? 'Vendedor' : 'Administrador' }}
                 </span>
               </label>
             </div>

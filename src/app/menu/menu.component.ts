@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
-  showModeratorBoard = false;
+  showSellerBoard = false;
   username?: string;
   isMobileMenuOpen = false;
 
@@ -47,7 +47,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showSellerBoard = this.roles.some((role) => ['ROLE_SELLER', 'ROLE_VENDEDOR'].includes(role));
 
       this.username = user.username;
     }

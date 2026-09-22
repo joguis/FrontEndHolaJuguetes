@@ -10,13 +10,17 @@
   width: 40px;
   height: 40px;
   border-radius: var(--toy-radius-md);
-  background: var(--toy-primary-gradient);
-  color: #ffffff;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
   box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.brand-icon-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand-title {
@@ -62,10 +66,10 @@
   color: #991b1b !important;
 }
 
-.badge-nav.mod-nav {
+.badge-nav.seller-nav {
   color: #b45309 !important;
 }
-.badge-nav.mod-nav:hover, .badge-nav.mod-nav.active {
+.badge-nav.seller-nav:hover, .badge-nav.seller-nav.active {
   background-color: #fef3c7;
   color: #92400e !important;
 }

@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  availableRoles: string[] = ['mod', 'admin', 'user'];
+  availableRoles: string[] = ['admin', 'seller'];
 
   onRoleChange(event: any) {
     const value = event.target.value;

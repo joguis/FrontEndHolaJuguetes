@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title>Logo Hola Juguetes</title>
+  <rect width="96" height="96" rx="24" fill="#ff6b6b"/>
+  <path d="M24 31h48v40H24z" fill="#fff"/>
+  <path d="M20 31h56v10H20z" fill="#ffd166"/>
+  <path d="M44 31h8v40h-8z" fill="#4ecdc4"/>
+  <path d="M20 48h56v8H20z" fill="#4ecdc4"/>
+  <path d="M36 31c0-8 5-13 12-13s12 5 12 13h-8c0-3-1-5-4-5s-4 2-4 5z" fill="#f7fff7"/>
+</svg>

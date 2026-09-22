@@ -23,15 +23,13 @@
             @for (role of currentUser.roles; track role) {
               <span class="toy-badge" [ngClass]="{
                 'toy-badge-admin': role === 'ROLE_ADMIN' || role === 'admin',
-                'toy-badge-mod': role === 'ROLE_MODERATOR' || role === 'mod',
-                'toy-badge-user': role === 'ROLE_USER' || role === 'user'
+                'toy-badge-seller': role === 'ROLE_SELLER' || role === 'ROLE_VENDEDOR' || role === 'seller'
               }">
                 <i class="bi" [ngClass]="{
                   'bi-shield-lock-fill': role === 'ROLE_ADMIN' || role === 'admin',
-                  'bi-sliders': role === 'ROLE_MODERATOR' || role === 'mod',
-                  'bi-person-check-fill': role === 'ROLE_USER' || role === 'user'
+                  'bi-person-check-fill': role === 'ROLE_SELLER' || role === 'ROLE_VENDEDOR' || role === 'seller'
                 }"></i>
-                {{ role === 'ROLE_ADMIN' ? 'Administrador' : role === 'ROLE_MODERATOR' ? 'Moderador' : role === 'ROLE_USER' ? 'Usuario Regular' : role }}
+                {{ role === 'ROLE_ADMIN' ? 'Administrador' : (role === 'ROLE_SELLER' || role === 'ROLE_VENDEDOR' ? 'Vendedor' : role) }}
               </span>
             }
           </div>
@@ -83,14 +81,9 @@
           </h5>
 
           <div class="d-flex flex-wrap gap-2">
-            <a routerLink="/user" class="toy-btn-secondary">
-              <i class="bi bi-grid"></i> Mi Panel de Usuario
+            <a routerLink="/movimientos/registrar" class="toy-btn-secondary" *ngIf="currentUser.roles?.includes('ROLE_SELLER') || currentUser.roles?.includes('ROLE_VENDEDOR')">
+              <i class="bi bi-grid"></i> Registrar movimiento
             </a>
-            @if (currentUser.roles && (currentUser.roles.includes('ROLE_MODERATOR') || currentUser.roles.includes('mod'))) {
-              <a routerLink="/mod" class="toy-btn-outline">
-                <i class="bi bi-sliders"></i> Panel de Moderación
-              </a>
-            }
             @if (currentUser.roles && (currentUser.roles.includes('ROLE_ADMIN') || currentUser.roles.includes('admin'))) {
               <a routerLink="/admin" class="toy-btn-outline">
                 <i class="bi bi-shield-lock"></i> Panel de Administración
