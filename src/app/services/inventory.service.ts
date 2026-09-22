@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -30,17 +30,11 @@ export class InventoryService {
     const endpoint = this.endpoint(resource);
     const request$ = term.trim()
       ? this.http.post<BackendPageResponse<T>>(`${endpoint}/buscar`, body)
-      : this.http.request<BackendPageResponse<T>>('GET', endpoint, { body });
+      : this.http.get<BackendPageResponse<T>>(endpoint, {
+        params: new HttpParams().set('page', page).set('size', size)
+      });
 
-    return request$.pipe(
-      map(response => ({
-        content: response.contenido,
-        totalElements: response.totalElementos,
-        totalPages: response.totalPaginas,
-        number: response.pagina,
-        size: response.tamanoPagina
-      }))
-    );
+    return request$.pipe(map(response => this.toPageResponse(response, page, size)));
   }
   save<T>(resource: InventoryResource, payload: object, id?: number): Observable<T> {
     const endpoint = this.endpoint(resource);
@@ -68,6 +62,20 @@ export class InventoryService {
       return value;
     }
     return value;
+  }
+  private toPageResponse<T>(response: BackendPageResponse<T> | T[], page: number, size: number): PageResponse<T> {
+    if (Array.isArray(response)) {
+      return { content: response, totalElements: response.length, totalPages: response.length ? 1 : 0, number: page, size };
+    }
+    const content = response.contenido;
+    const totalElements = response.totalElementos;
+    return {
+      content,
+      totalElements,
+      totalPages: response.totalPaginas,
+      number: response.pagina,
+      size: response.tamanoPagina
+    };
   }
   private endpoint(resource: InventoryResource): string {
     return `${this.api}/${resource === 'movimientos' ? 'movimientos-inventario' : resource}`;
