@@ -5,6 +5,7 @@ import { InventoryService, InventoryRecord, MovementType } from '../services/inv
 
 @Component({ selector: 'app-board-seller', standalone: true, imports: [CommonModule, FormsModule], templateUrl: './board-seller.component.html', styleUrl: './board-seller.component.css' })
 export class BoardSellerComponent implements OnInit {
+  private readonly referenceStorageKey = 'seller-active-references';
   products: InventoryRecord[] = [];
   type: MovementType = 'ENTRADA';
   activeReference = '';
@@ -16,12 +17,17 @@ export class BoardSellerComponent implements OnInit {
 
   ngOnInit(): void {
     this.inventory.list<InventoryRecord>('productos', 0, 100).subscribe({ next: response => this.products = response.content ?? [], error: error => this.error = this.readError(error) });
-    this.advance('ENTRADA');
+    const storedReference = this.readStoredReference('ENTRADA');
+    if (storedReference) this.activeReference = storedReference;
+    else this.advance('ENTRADA');
   }
   setType(type: MovementType): void { this.type = type; }
   advance(type: MovementType): void {
     this.error = ''; this.activeReference = '';
-    this.inventory.nextReference(type).subscribe({ next: reference => this.activeReference = this.parseReference(reference), error: error => this.error = this.readError(error) });
+    this.inventory.nextReference(type).subscribe({ next: reference => {
+      this.activeReference = this.parseReference(reference);
+      this.storeReference(type, this.activeReference);
+    }, error: error => this.error = this.readError(error) });
   }
   submit(): void {
     if (!this.form.productoId) {
@@ -35,5 +41,21 @@ export class BoardSellerComponent implements OnInit {
     });
   }
   private parseReference(reference: string): string { return typeof reference === 'string' ? reference.replace(/^Fact/i, 'fact').replace(/^Ticket/i, 'ticket') : reference; }
+  private readStoredReference(type: MovementType): string {
+    try {
+      const references = JSON.parse(sessionStorage.getItem(this.referenceStorageKey) || '{}') as Record<string, string>;
+      return references[type] || '';
+    } catch {
+      return '';
+    }
+  }
+  private storeReference(type: MovementType, reference: string): void {
+    try {
+      const references = JSON.parse(sessionStorage.getItem(this.referenceStorageKey) || '{}') as Record<string, string>;
+      references[type] = reference;
+      sessionStorage.setItem(this.referenceStorageKey, JSON.stringify(references));
+    } catch {
+    }
+  }
   private readError(error: any): string { return error?.error?.message || error?.error || 'No se pudo conectar con el servicio de inventario.'; }
 }

@@ -48,6 +48,40 @@
   padding: 2rem;
 }
 
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--toy-text-secondary);
+  padding: 0.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+input[name="password"] {
+  padding-right: 2.75rem;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  color: var(--toy-primary);
+}
+
+.seller-role-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #d97706;
+  font-weight: 600;
+  padding: 0.5rem 0.65rem;
+  background: #f8fafc;
+  border: 1.5px solid var(--toy-border);
+  border-radius: var(--toy-radius-md);
+}
+
 /* Roles Grid */
 .roles-selection-grid {
   display: grid;

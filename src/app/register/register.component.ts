@@ -17,24 +17,12 @@ export class RegisterComponent implements OnInit {
     username: null,
     email: null,
     password: null,
-    role: [],
+    role: ['seller'],
   };
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
-  availableRoles: string[] = ['admin', 'seller'];
-
-  onRoleChange(event: any) {
-    const value = event.target.value;
-    if (event.target.checked) {
-      this.form.role.push(value);
-    } else {
-      this.form.role = this.form.role.filter(
-        (role: string) => role !== value
-      );
-    }
-  }
+  showPassword = false;
 
   ngOnInit(): void {
     console.log('Creando componente');
@@ -44,9 +32,9 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     console.log('registrando cliente');
-    const { username, email, password,role } = this.form;
+    const { username, email, password } = this.form;
 
-    this.authService.register(username, email, password, role).subscribe({
+    this.authService.register(username, email, password, ['seller']).subscribe({
       next: (data) => {
         console.log(data);
         this.isSuccessful = true;

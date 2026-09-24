@@ -51,7 +51,7 @@
             </span>
             <input
               id="password"
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               class="toy-input"
               name="password"
               placeholder="Ingresa tu contraseña"
@@ -59,6 +59,15 @@
               required
               #password="ngModel"
             />
+            <button
+              type="button"
+              class="password-toggle"
+              [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              [attr.title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              (click)="showPassword = !showPassword"
+            >
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
           </div>
           @if (f.submitted && password.errors) {
             <small class="text-danger mt-1 d-block">

@@ -77,7 +77,7 @@
             </span>
             <input
               id="password"
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               class="toy-input"
               name="password"
               placeholder="Mínimo 6 caracteres"
@@ -85,6 +85,15 @@
               minlength="6"
               #password="ngModel"
             />
+            <button
+              type="button"
+              class="password-toggle"
+              [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              [attr.title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              (click)="showPassword = !showPassword"
+            >
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
           </div>
           @if (f.submitted && password.errors) {
             <small class="text-danger mt-1 d-block">
@@ -93,34 +102,14 @@
           }
         </div>
 
-        <!-- Roles Selection Section -->
+        <!-- Seller role is assigned automatically for public registration -->
         <div class="toy-form-group">
           <label class="toy-label">
-            <span>Roles de Acceso</span>
-            <small class="text-muted fw-normal ms-1">(Selecciona los perfiles que deseas solicitar)</small>
+            <span>Tipo de cuenta</span>
           </label>
-          
-          <div class="roles-selection-grid">
-            <div *ngFor="let role of availableRoles" class="role-checkbox-card">
-              <label class="d-flex align-items-center gap-2 cursor-pointer w-100 m-0">
-                <input
-                  type="checkbox"
-                  class="form-check-input role-check"
-                  [value]="role"
-                  (change)="onRoleChange($event)"
-                />
-                <span class="role-badge-pill" [ngClass]="{
-                    'badge-seller-style': role === 'seller',
-                  'badge-admin-style': role === 'admin'
-                }">
-                  <i class="bi" [ngClass]="{
-                    'bi-person-check': role === 'seller',
-                    'bi-gear-fill': role === 'admin'
-                  }"></i>
-                  {{ role === 'seller' ? 'Vendedor' : 'Administrador' }}
-                </span>
-              </label>
-            </div>
+          <div class="seller-role-display">
+            <i class="bi bi-person-check"></i>
+            <span>Vendedor</span>
           </div>
         </div>
 

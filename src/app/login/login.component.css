@@ -48,6 +48,28 @@
   padding: 2rem;
 }
 
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--toy-text-secondary);
+  padding: 0.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+input[name="password"] {
+  padding-right: 2.75rem;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  color: var(--toy-primary);
+}
+
 .badge-success-circle {
   width: 56px;
   height: 56px;

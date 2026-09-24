@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  showPassword = false;
 
   constructor(
     private authService: AuthService,

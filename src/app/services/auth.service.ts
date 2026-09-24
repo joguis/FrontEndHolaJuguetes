@@ -31,7 +31,7 @@ export class AuthService {
     username: string,
     email: string,
     password: string,
-    role: Set<String>
+    role: string[]
   ): Observable<any> {
     return this.http.post(
       AUTH_API + 'signup',
